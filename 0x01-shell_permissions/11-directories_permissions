@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod --recursive 731 ./*/
+chmod --recursive u+x,g+x,o+x ./?*/
