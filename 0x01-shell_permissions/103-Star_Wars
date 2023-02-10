@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "playing Star Wars IV..."
+telnet towel.blinkenlights.nl
