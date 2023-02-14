@@ -1,0 +1,2 @@
+#!/bin/bash
+grep --regexp=bin -iv /etc/passwd
