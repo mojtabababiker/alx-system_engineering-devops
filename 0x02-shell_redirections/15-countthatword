@@ -1,2 +1,2 @@
 #!/bin/bash
-grep --word-regex --regexp=bin -i -c /etc/passwd
+grep --regexp=bin -i -c /etc/passwd
