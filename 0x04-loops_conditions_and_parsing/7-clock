@@ -9,7 +9,7 @@ do
 	echo "Hour: $h"
 	while (( m <= 59 ))
 	do
-		echo $m
+		echo "$m"
 		(( m++ ))
 	done
 	(( h++ ))
