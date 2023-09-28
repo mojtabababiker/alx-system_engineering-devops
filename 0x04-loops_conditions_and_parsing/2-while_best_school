@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#A bash script that used to print a certain message using the while
+#+ loop
+
+i=0
+while (( "$i" < 10 ))
+do
+	echo "Best School"
+	i=$i+1
+done
