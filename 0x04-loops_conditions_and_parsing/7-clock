@@ -2,7 +2,7 @@
 #A bash script that print hours
 
 h=0
-m=0
+m=1
 
 while (( h <= 12 ))
 do
@@ -13,6 +13,6 @@ do
 		(( m++ ))
 	done
 	(( h++ ))
-	m=0
+	m=1
 done
 	
