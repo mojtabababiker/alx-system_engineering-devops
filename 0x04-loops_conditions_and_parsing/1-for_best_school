@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#A bash script that use for loop to print some message certain amount
+#+ of time
+
+for _ in {0..9}
+    do
+	echo "Best School"
+done
