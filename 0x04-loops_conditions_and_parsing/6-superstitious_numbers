@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#A bash script that print some messages certain amount of time
+#+ unsing while loop and if, elif, else
+
+i=1
+bad="bad luck from"
+
+while (( i < 21 ))
+do
+    echo $i
+    case "$i" in
+	"4")
+	    echo "$bad China"
+	    ;;
+
+	"9")
+	    echo "$bad Japan"
+	    ;;
+
+	"17")
+	    echo "$bad Italy"
+	    ;;
+
+	*)
+	    ;;
+
+    esac
+    (( i++ ))
+done
