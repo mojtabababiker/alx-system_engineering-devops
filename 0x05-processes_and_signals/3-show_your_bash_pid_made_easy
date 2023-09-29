@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# A bash script that prints a procces information using grep
+pgrep -l "bash"
