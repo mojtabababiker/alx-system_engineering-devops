@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#A bash script which print all the current ps in ps tree
+
+ps -A uf
