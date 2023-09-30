@@ -3,8 +3,11 @@
 #+ cut command
 
 
-files=$(ls -1 | cut --delimiter='-' -f 2)
+files=$(find | cut --delimiter="/" -f 2 | cut --delimiter="-" -f 2)
 for i in $files
 do
-    echo $i
+    if [[ "$i" != "."* ]]
+       then
+	   echo "$i"
+    fi
 done
