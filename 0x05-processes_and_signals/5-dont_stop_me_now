@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #A bash script that kill the proccess 4-to_infinity_and_beyond
 
-pid=$(grep -f "4-to_infinity_and_beyond")
+pid=$(pgrep -f "bash ./4-to_infinity_and_beyond")
 
-kill -9 pid
+kill -9 "$pid"
