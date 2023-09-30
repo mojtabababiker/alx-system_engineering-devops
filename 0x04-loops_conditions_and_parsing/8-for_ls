@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#A bash script used to customize the print of some file using
+#+ cut command
+
+
+files=$(ls -1 | cut --delimiter='-' -f 2)
+for i in $files
+do
+    echo $i
+done
