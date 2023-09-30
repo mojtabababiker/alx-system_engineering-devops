@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#A bash script that parse an Apache access-log file and extract
+#+ the IPs and the request state for each request made
+
+file="apache-access.log"
+
+awk '{ print $1,$9 }' OFS=' ' "$file" | sort -r | uniq -c | sort -r
+
