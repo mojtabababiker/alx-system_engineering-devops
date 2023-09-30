@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#A Bash(init) script ahich control the manage_my_process script
+# useage ./101-manage_my_process option
+# option: can be one of the following:
+#        1] start: to start manage_my_process file
+#	 2] stop: to stop manage_my_process file
+#	 3] restart: to restart manage_my_process file
+
+file="manage_my_process"
+pidFile="/var/run/my_process.pid"
+option=$1
+
+case $option in
+    "start")
+	"./$file" &
+	echo "$file started"
+	echo "$$" > "$pidFile"
+	;;
+    "stop")
+	pkill -f -9 "bash ./$file"
+	echo "$file stoped"
+	rm -f "$pidFile"
+	;;
+    "restart")
+	pkill -f -9 "bash ./$file"
+	echo "$file restarted"
+	rm -f "$pidFile"
+	echo "$$" > "$pidFile"
+	"./$file" &
+	;;
+    *)
+	echo 'Usage: manage_my_process {start|stop|restar}'
+	;;
+esac

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# A daemon script that write 'I am alive!' at the /tmp/my_process file
+#+ every 2 second
+
+file="/tmp/my_process"
+echo "I am alive!" > "$file"
+
+while true
+do
+    echo "I am alive!" >> "$file"
+    sleep 2
+done
