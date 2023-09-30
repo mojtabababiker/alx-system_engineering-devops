@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# A bash script that kill a proccess using pkill with signal 9
+
+pkill -f -9 "bash ./7-highlander"
