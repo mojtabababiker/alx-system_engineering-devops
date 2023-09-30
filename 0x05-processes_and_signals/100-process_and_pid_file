@@ -2,12 +2,14 @@
 #A bash script that handle SIGNALS and do cleaning
 #+ while runing some statments
 
-trap "echo I hate the kill command" 15
-trap "echo Y U no love me?!; rm -f /var/run/myscript.pid; exit" 2
+sudo echo "$$" > "myscript.pid"
+sudo mv "myscript.pid" "/var/run/"
 
-touch "/var/run/myscript.pid"
-echo "$$" > "/var/run/myscript.pid"
+
 while true
 do
+    trap "echo I hate the kill command" 15
+    trap "echo Y U no love me?!; sudo rm -f /var/run/myscript.pid; exit" 2
+
     echo "To infinity and beyond"
 done
