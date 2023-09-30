@@ -3,7 +3,7 @@
 #+ every 2 second
 
 file="/tmp/my_process"
-echo "I am alive!" > "$file"
+echo "I am alive!" >> "$file"
 
 while true
 do
