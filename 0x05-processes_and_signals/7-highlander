@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #A bash script that print some message
 
-trap "I am invincible!!!" TERM
+trap "echo I am invincible!!!" 15
 while true
 do
 	echo "To infinity and beyond"
