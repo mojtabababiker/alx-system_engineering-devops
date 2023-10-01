@@ -18,7 +18,7 @@ case $option in
 	;;
     "stop")
 	pkill -f -9 "bash ./$file"
-	echo "$file stoped"
+	echo "$file stopped"
 	rm -f "$pidFile"
 	;;
     "restart")
