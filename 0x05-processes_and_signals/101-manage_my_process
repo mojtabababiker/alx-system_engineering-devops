@@ -29,6 +29,6 @@ case $option in
 	sudo "./$file" &
 	;;
     *)
-	echo 'Usage: manage_my_process {start|stop|restar}'
+	echo 'Usage: manage_my_process {start|stop|restart}'
 	;;
 esac
