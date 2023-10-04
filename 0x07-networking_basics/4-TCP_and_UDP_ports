@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A Bash script to display the UDP and TCP ports that
+#+ are in LISTEN state and thier PID/Program name
+
+netstat -lp
