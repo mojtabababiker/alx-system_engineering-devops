@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Bash script that display all the IPv4 that are active
+
+netstat -a | grep -E "\btcp\b|\budp\b" | awk '{ print $4 }' | cut -d ':' -f 1
