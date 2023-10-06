@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Bash script to set port 98 on the localhost listening
 
-nc -l -P localhost 98
+nc -l localhost 98
