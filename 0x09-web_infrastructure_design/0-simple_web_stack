@@ -1,0 +1,58 @@
+What is a server?
+
+     A server is computer hardware or a software that provides a services to
+     the users, such as:
+     	 1. Files managing
+	 2. Transfering Data between users
+	 3. Authorization
+
+What is the role of the domain name?
+
+     The main idea of the domain name is to easies the domain (host)
+     accessing, by mapping the host IP to a specific name.
+
+What type of DNS record `www` is in `www.foobar.com`?
+
+     While the foobar.com is the domain name, the `www` in `www.foobar.com`
+     known as a supdomain of `foobar.com`
+
+What is the role of the web server?
+
+     The main roles of the web server is to provide, store, retrive, manage,
+     host data, and responces to users HTTP requests by the aproprate HTML
+     content
+
+What is the role of the application server?
+
+     While the web server is return a static HTML page for the users
+     requests, the applicattion server implements the user busines logics
+     and generate a daynamic HTML content depending on the user state
+
+What the role of the database?
+
+     Database is responcible of storing host data, and give the abilty to
+     update, change, and retrive for these data in an orginaized manner.
+
+What is the server using to communicate whit the computer of the user
+requesting the website?
+
+     There are two main protocols that are in use for most of the host-browser
+     communication
+     HTTP: stand for Hiper Text Transefer Protocol
+     HTTPS: stand for Hiper Text Transefer Protocol Secure
+
+
+Some issues on this infrastructure design:
+
+1- SPOF: because this design only consests of one server, so any failure on
+   	 the server or any element of its elements, will lead to downtime
+	 for all the system
+
+2- Planned Downtime: for the planned downtime (to update or maintance) the
+   	   	     whole system will be unavailable to users during the
+		     update or maintance period of time.
+
+3- Scalablity: Due to one server system, and one database this infrastructure
+   	       will suffer if there are many requests at the time, it can be
+	       solved by using two or moreserver either active or standby and
+	       and extra database will help too.
