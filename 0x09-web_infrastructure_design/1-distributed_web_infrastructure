@@ -1,0 +1,57 @@
+Why we added some additional element:
+
+    1- server:
+       By adding one additional server increases the Availabilty and inhances
+       the scalablity, on the planned and un-planned downtime
+
+    2- load-balancer:
+       The main role of the load-palancer is to dived the trafic between the
+       two server
+
+Load-balancer Algrothim:
+
+    The load-balancer uses the least connections algrothim, in which the
+    trafic will be send to the server that have the less number of requests
+
+    The load-balancer in the current infrastructure is enabling an
+    Active-Active setup.
+    The difference between Active-Active and Active-Passive, in the
+    Active-Active setup the load-balancer will divide the traffic
+    between all the servers according to its algrothim, and if there is a
+    downtime (planned un-planned) happend at a server the load-balancer will
+    cut the traffic from that server and route all of it to rest of servers
+
+The database Primary-Replica cluster:
+    Database replication is the practice of creating and storing copies of the
+    databse, and it have two types Active-Active cluster in wich all the
+    cluster will have the read-write permission and the sync will go on all
+    sides. and Read-only cluster in wich one database (master/primary) will
+    have the Write permission and all the Read queries will be done on the
+    (slaves/replicas)  databases, and the sync will go from the primary to
+    replicas
+
+
+The difference between Primary node and Replica node:
+    All the Writing queries will be done on the Primary node mean while the
+    Replica will have just the Reading permission, also the sync will be from
+    the Primary to all Replica nodes.
+
+
+The current infrastructure suffers from some issues:
+
+    1- SPOF: this infrastructure has a SPOF at the load-balancer, in wich any
+       	     failure on it will leads to downtime for the entire system
+
+    2- Security issues: becuase there are no firewalls on it filtering the
+       			received requests, the host can be open to all
+			users on the internet as long they have its IP.
+			And from anther point in which the connections are
+			made by the HTTP and it is a plain-text transfer
+			protocol, cuases the transfere data to be opened and
+			readabel by any middle nodes between the browser and
+			the host
+
+    3- No monitoring: monitoring is important to scale and protect the server
+       	  	      or the host from any feature breach, or any overloading
+		      that may happend. This infrastructure has no monitoring
+		      tools.
