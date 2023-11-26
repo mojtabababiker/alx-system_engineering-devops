@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# login into my server with ubuntu username using the school key
 ssh -i ~/.ssh/school ubuntu@35.153.19.221
