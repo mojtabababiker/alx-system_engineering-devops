@@ -2,11 +2,11 @@
 # without password login
 
 $content = "Include /etc/ssh/ssh_config.d/*.conf
-    Host *
-        PasswordAuthentication no
-        SendEnv LANG LC_*
-        HashKnownHosts yes
-        GSSAPIAuthentication yes"
+Host *
+     PasswordAuthentication no
+     SendEnv LANG LC_*
+     HashKnownHosts yes
+     GSSAPIAuthentication yes"
 
 file { 'client_auth':
   path    => '/etc/ssh/ssh_config',
