@@ -4,12 +4,13 @@
 $content = "Include /etc/ssh/ssh_config.d/*.conf
 Host *
      PasswordAuthentication no
+     IdentityFile ~/.ssh/school
      SendEnv LANG LC_*
      HashKnownHosts yes
      GSSAPIAuthentication yes"
 
 file { 'client_auth':
-  path    => '/etc/ssh/ssh_config',
   ensure  => 'present',
+  path    => '/etc/ssh/ssh_config',
   content => $content
 }
