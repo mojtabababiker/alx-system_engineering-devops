@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 # Bash script to install and configure in a baisc level for the nginx web server
-LOCATION_DIRECTIVE='include \/etc\/nginx\/sites-enabled\/*;\
+LOCATION_DIRECTIVE="include \/etc\/nginx\/sites-enabled\/*;\
 \
 \tserver {\
 \t\tserver_name tamarjy.tech *.tamarjy.tech;\
 \t\tlisten 35.153.19.221:80;\
 \
-\t\tlocation = \/ {\
-\t\t\troot \/var\/www\/html;\
+\t\tlocation \/default\/{\
+\t\t\tdefault_server;\
+\t\t\treturn 404 'Ceci n\'est pas une page';\
 \t\t}\
 \
-\t}'
+\t}"
 TOADDAFTER='include \/etc\/nginx\/sites\-enabled\/\*;'
 apt-get -y -q update
 apt-get -y -q install nginx
 sed -i "s/$TOADDAFTER/$LOCATION_DIRECTIVE/" /etc/nginx/nginx.conf
-echo "Hello World!" > /var/www/html/*.html
 nginx -s reload
