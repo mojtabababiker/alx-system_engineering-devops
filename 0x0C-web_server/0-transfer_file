@@ -11,6 +11,6 @@ if [ $# -lt 3 ]
 then
     echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
 else
-    scp -i -o StrictHostKeyChecking=no \
+    scp -o StrictHostKeyChecking=no -i\
 	"$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USRNAME"@"$IP":~/
 fi
