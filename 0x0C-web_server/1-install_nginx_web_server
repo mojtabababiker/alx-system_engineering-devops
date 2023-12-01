@@ -1,19 +1,41 @@
 #!/usr/bin/env bash
 # Bash script to install and configure in a baisc level for the nginx web server
-LOCATION_DIRECTIVE='include \/etc\/nginx\/sites-enabled\/*;\
-\
-\tserver {\
-\t\tserver_name tamarjy.tech *.tamarjy.tech;\
-\t\tlisten 35.153.19.221:80;\
-\
-\t\tlocation = \/ {\
-\t\t\troot \/var\/www\/html;\
-\t\t}\
-\
-\t}'
-TOADDAFTER='include \/etc\/nginx\/sites\-enabled\/\*;'
-apt-get -y -q update
-apt-get -y -q install nginx
-sed -i "s/$TOADDAFTER/$LOCATION_DIRECTIVE/" /etc/nginx/nginx.conf
-echo "Hello World!" > /var/www/html/*.html
+
+# update and upgrade packages
+apt-get update -y -q && apt-get upgrade -y -q
+# installing nginx pre-requests
+apt-get install -y curl
+
+# installing nginx key and setup the download
+curl -o nginx_key.key -s https://nginx.org/keys/nginx_signing.key
+apt-key add nginx_key.key
+
+echo "deb http://nginx.org/packages/ubuntu/ focal nginx" >> \
+     /etc/apt/sources.list
+echo "deb-src http://nginx.org/packages/ubuntu/ focal nginx" >> \
+     /etc/apt/sources.list
+
+# install nginx
+apt-get update
+apt-get install -y -q nginx
+systemctl start nginx
+systemctl enable nginx
+
+# configure nginx default server:
+#   Basic setup for the default server configuration
+OLD='location \/ {\
+        root   \/usr\/share\/nginx\/html;\
+        index  index\.html index\.htm;\
+    }'
+NEW='location \/ {\
+        root   \/var\/www\/html;\
+        index  index\.html;\
+    }'
+echo "<h1>Hello World</h1>" > /var/www/html/index.html
+
+sed -i "s/listen       80;/listen       80 default_server;/" \
+    /etc/nginx/conf.d/default.conf
+sed -i "s/server_name  localhost;/server_name_;/" \
+    /etc/nginx/conf.d/default.conf
+sed -i "s/$OLD/$NEW" /etc/nginx/conf.d/default.conf
 nginx -s reload
