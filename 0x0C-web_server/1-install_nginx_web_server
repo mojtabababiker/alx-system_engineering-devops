@@ -23,19 +23,19 @@ systemctl enable nginx
 
 # configure nginx default server:
 #   Basic setup for the default server configuration
-OLD='location \/ {\
-        root   \/usr\/share\/nginx\/html;\
-        index  index\.html index\.htm;\
-    }'
-NEW='location \/ {\
-        root   \/var\/www\/html;\
-        index  index\.html;\
-    }'
-echo "<h1>Hello World</h1>" > /var/www/html/index.html
+mkdir -p /var/www/html/
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
 
-sed -i "s/listen       80;/listen       80 default_server;/" \
-    /etc/nginx/conf.d/default.conf
-sed -i "s/server_name  localhost;/server_name_;/" \
-    /etc/nginx/conf.d/default.conf
-sed -i "s/$OLD/$NEW" /etc/nginx/conf.d/default.conf
+echo 'server {
+    listen       80 default_server;
+    server_name  _;
+
+    location / {
+        root   /var/www/html;
+        index  index.html;
+    }
+}
+' > /etc/nginx/conf.d/default.conf
+
 nginx -s reload
