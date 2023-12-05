@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# auto-setup for the nginx server on my webserver to some soe defaults
+
+# install nginx
+## update apt and install all nginx prerequests
+## update apt library
+apt update -yq
+## install dependences
+apt install -yq curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+
+## install nginx
+apt update -qy
+apt install -yq nginx
+#sleep 0.25s # just if the system hanged
+
+# start nginx and set it to be auto started each time the sever is ran
+systemctl start  nginx
+systemctl enable nginx
+
+# configure the custom nginx
+## remove the builtin default server fro nginx
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+## create the default server configuration file
+## get the machine name that server nginx
+HostName=`cat /proc/sys/kernel/hostname`
+default_file="/etc/nginx/conf.d/default.conf"
+touch "$default_file" # just in case
+
+## over-write the default configuration file
+echo -e "server {
+    listen       80  default_server;
+    server_name  _;
+    root         /var/www/html;
+    error_page   404        /404.html;
+    add_header   X-Served-By  $HostName always;
+
+    location = / {
+        index   /index.html;
+    }
+
+    location /redirect_me {
+        return  301 $server_name;
+    }
+}
+"> "$default_file"
+
+## create the defualt server files
+mkdir -p /var/www/html
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+# reload nginx server
+nginx -s reload
