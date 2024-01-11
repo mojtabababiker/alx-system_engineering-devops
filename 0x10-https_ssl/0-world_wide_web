@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# A bash script to check and debug DNS
+
+check() {
+    domain=$1;
+    subdomain=$2;
+
+    if [ -z "$subdomain" ]
+    then
+	#print all information about the domain
+	dig "www.$domain" | \
+	    awk '{ if (match($0, /^[^;](\w+-?\w+)/, arr)) {
+      	     print "The subdomain " arr[0] " is a " $4 " record and points to " $5
+	   }
+	 }'
+	dig "lb-01.$domain" | \
+	    awk '{ if (match($0, /^[^;](\w+-\w+)/, arr)) {
+      	     print "The subdomain " arr[0] " is a " $4 " record and points to " $5
+	   }
+	 }'
+	dig "web-01.$domain" | \
+	    awk '{ if (match($0, /^[^;](\w+-\w+)/, arr)) {
+      	     print "The subdomain " arr[0] " is a " $4 " record and points to " $5
+	   }
+	 }'
+	dig "web-02.$domain" | \
+	    awk '{ if (match($0, /^[^;](\w+-\w+)/, arr)) {
+      	     print "The subdomain " arr[0] " is a " $4 " record and points to " $5
+	   }
+	 }'
+
+    else
+	#print for the specified subdomain
+	dig "$subdomain.$domain" | \
+	    awk '{ if (match($0, /^[^;](\w+-?\w+)/, arr)) {
+      	     print "The subdomain " arr[0] " is a " $4 " record and points to " $5
+	   }
+	 }'
+    fi
+
+
+}
+
+check "$1" "$2"
+exit 0
