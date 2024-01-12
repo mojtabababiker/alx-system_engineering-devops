@@ -2,37 +2,12 @@
 # Bash script to install and configure in a baisc level for the nginx web server
 
 # update and upgrade packages
-apt-get update -y -q && apt-get upgrade -y -q
+apt-get update -y &> /dev/null
 # installing nginx pre-requests
-apt-get install -y curl
-
-# installing nginx key and setup the download
-curl -o nginx_key.key -s https://nginx.org/keys/nginx_signing.key
-apt-key add nginx_key.key
-
-# Check if the nginx key is added befor to the apt source list
-ADD_NGINX="True"
-APT_LIST="/etc/apt/sources.list"
-while IFS= read -r line
-do
-    if [ "$line" == "deb http://nginx.org/packages/ubuntu/ focal nginx" ]
-    then
-	ADD_NGINX="False"
-	break
-    fi
-done < "$APT_LIST"
-
-if [ "$ADD_NGINX" == "True" ]
-then
-    echo "deb http://nginx.org/packages/ubuntu/ focal nginx" >> \
-	 "$APT_LIST"
-    echo "deb-src http://nginx.org/packages/ubuntu/ focal nginx" >> \
-	 "$APT_LIST"
-fi
+apt-get install -y curl &> /dev/null
 
 # install nginx
-apt-get update
-apt-get install -y -q nginx
+apt-get install -y nginx &> /dev/null
 systemctl start nginx
 systemctl enable nginx
 
@@ -41,19 +16,25 @@ systemctl enable nginx
 mkdir -p /var/www/html/
 touch /var/www/html/index.html
 echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+echo -e 'server {
+    listen     80 default_server;
+    server_name  54.84.73.143;
+    root         /var/www/html;
+    error_page   404        /404.html;
+    add_header   X-Served-By  \$hostname always;
 
-echo 'server {
-    listen     *:80 default_server;
-
-    location / {
-        root   /var/www/html;
-        index  index.html;
+    location = / {
+        index  /index.html;
     }
 
     location   /redirect_me {
-        return 301 "Moved Permanently";
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
 }
 ' > /etc/nginx/conf.d/default.conf
+sed -i 's/default_server;/;/g' /etc/nginx/sites-enabled/default
 
+service nginx start
 nginx -s reload
+exit 0
