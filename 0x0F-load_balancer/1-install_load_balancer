@@ -8,11 +8,16 @@ apt update -y &> /dev/null
 ## enable a dedicated PPA
 apt-get install -y --no-install-recommends software-properties-common \
     &> /dev/null
-add-apt-repository -yu ppa:vbernat/haproxy-2.8
+add-apt-repository -yu ppa:vbernat/haproxy-2.8 &> /dev/null
 ## install HAProxy
-apt-get install -y haproxy=2.8.\*
+apt-get install -y haproxy=2.8.\* &> /dev/null
+
+## create directory for the configurations files
+mkdir -p /etc/haproxy/haproxy.conf.d
 
 echo -e "ENABLED=1" >> /etc/default/haproxy
+
+service haproxy start
 
 echo -e "\nfrontend web-1
 \tbind 0.0.0.0:80
@@ -22,8 +27,9 @@ backend web-servers
 \tbalance roundrobin
 \tserver web-01 54.84.73.143:80 check
 \tserver web-02 35.175.102.250:80 check
-" >> /etc/haproxy/haproxy.cfg
+" >> /etc/haproxy/haproxy.conf.d/web-01-02_lb.conf
 
-service haproxy start
+echo -e "include /etc/haproxy/haproxy.conf.d/*.conf" >> /etc/haproxy/haproxy.cfg
+
 service haproxy reload
 exit 0
