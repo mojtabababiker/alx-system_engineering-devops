@@ -2,21 +2,27 @@
 ## configure load balancer HAProxy for ubuntu machine that will serves
 ## two servers with roun-robin algrothim
 
-apt update -yq
+apt update -y > /dev/null
 
 # install HAProxy
 ## enable a dedicated PPA
 apt-get install -y --no-install-recommends software-properties-common
-add-apt-repository ppa:vbernat/haproxy-2.8
+add-apt-repository -yu ppa:vbernat/haproxy-2.8
 ## install HAProxy
 apt-get install -y haproxy=2.8.\*
 
-echo -e "frontend web-1
-\tbind :80
+echo -e "ENABLED=1" >> /etc/default/haproxy
+
+echo -e "\nfrontend web-1
+\tbind 0.0.0.0:80
 \tdefault_backend web-servers
 
 backend web-servers
 \tbalance roundrobin
-\tserver web-01 18.204.3.225:80 check
-\tserver web-02 54.146.86.208:80 check
+\tserver web-01 54.84.73.143:80 check
+\tserver web-02 35.175.102.250:80 check
 " >> /etc/haproxy/haproxy.cfg
+
+service haproxy start
+service haproxy restart
+exit 0
