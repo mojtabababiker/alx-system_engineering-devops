@@ -9,8 +9,8 @@ check() {
     then
 	#print all information about the domain
 	dig "www.$domain" | \
-	    awk '{ if (match($0, /^[^;](\w+-?\w+)/, arr)) {
-      	     print "The subdomain " arr[0] " is a " $4 " record and points to " $5
+	    awk '/^[^;]/ {
+      	     print "The subdomain www is a " $4 " record and points to " $5
 	   }
 	 }'
 	dig "lb-01.$domain" | \
