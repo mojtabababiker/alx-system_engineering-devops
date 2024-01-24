@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# script to backup mysql databases on the running servers
+# Accepts one argument that is the password of the root connecting to mysql
+#  USAGE: sudo ./5-mysql_backup <root-pwd>
+#  OUTPUT: backup.sql, day-month-year.tar.gz
+
+backup_file="backup.sql"
+if [ "$#" -lt 1 ]
+then
+    echo "USAGE: sudo ./5-mysql_backup <root-pwd>"
+else
+    mysqldump -Auroot -p"$1" > "$backup_file"
+    tar -acf "$(date +%d-%m-%Y)".tar.gz "$backup_file"
+fi
