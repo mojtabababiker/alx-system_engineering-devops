@@ -28,7 +28,7 @@ def print_employee_info():
     employee = employee_res.json()[0]
     todo_list = todo_res.json()
 
-    employee_name = employee.get("name", None)
+    employee_name = employee.get("username", None)
 
     done_tasks = done_task_res.json()
     done = len(done_tasks)
@@ -45,4 +45,4 @@ def print_employee_info():
 
 if __name__ == "__main__":
     id = sys.argv[1]
-    print_employee_info(id=id)
+    print_employee_info()
