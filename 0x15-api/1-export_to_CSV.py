@@ -4,12 +4,11 @@ Python script that, using REST API, for a given employee ID,
 returns information about his/her TODO list progress.
 """
 import csv
-import json
 import requests
 import sys
 
 
-def print_employee_info(id=""):
+def print_employee_info():
     """
     Print the employee with id=id TODO list
     """
@@ -45,8 +44,5 @@ def print_employee_info(id=""):
 
 
 if __name__ == "__main__":
-    try:
-        id = sys.argv[1]
-        print_employee_info(id=id)
-    except Exception as e:
-        print(e)
+    id = sys.argv[1]
+    print_employee_info(id=id)

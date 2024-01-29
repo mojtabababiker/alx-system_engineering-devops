@@ -8,7 +8,7 @@ import requests
 import sys
 
 
-def print_employee_info(id=""):
+def print_employee_info():
     """
     Print the employee with id=id TODO list
     """
@@ -44,17 +44,10 @@ def print_employee_info(id=""):
             employee_tasks_info.append(task_info)
 
         todo_all_employees[f"{id}"] = employee_tasks_info
-        print("="*14 + ">" + f"DONE WITH {employee_name}")
-        print("="*32)
-        print()
 
     with open("todo_all_employees.json", 'w', encoding='utf-8') as json_file:
         json.dump(todo_all_employees, json_file)
 
 
 if __name__ == "__main__":
-    try:
-        id = sys.argv[1]
-        print_employee_info(id=id)
-    except Exception as e:
-        print_employee_info()
+    print_employee_info()
