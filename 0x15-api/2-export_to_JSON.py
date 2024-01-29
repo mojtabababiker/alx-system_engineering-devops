@@ -28,7 +28,7 @@ def print_employee_info(id):
     employee = employee_res.json()[0]
     todo_list = todo_res.json()
 
-    employee_name = employee.get("name", None)
+    employee_name = employee.get("username", None)
 
     done_tasks = done_task_res.json()
     done = len(done_tasks)

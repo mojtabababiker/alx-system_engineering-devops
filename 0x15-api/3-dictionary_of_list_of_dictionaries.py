@@ -21,7 +21,7 @@ def print_employee_info():
     for employee in employees:
         # print(f"{employee.get('id', None)}: " + employee.get("name", None))
         id = employee.get("id", None)
-        employee_name = employee.get("name", None)
+        employee_name = employee.get("username", None)
         employee_tasks_info = list()
         if not id:
             continue
