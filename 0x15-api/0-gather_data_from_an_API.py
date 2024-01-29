@@ -8,7 +8,7 @@ import requests
 import sys
 
 
-def print_employee_info(id=""):
+def print_employee_info(id):
     """
     Print the employee with id=id TODO list
     """
@@ -34,14 +34,11 @@ def print_employee_info(id=""):
     done = len(done_tasks)
     total = len(todo_list)
 
-    print(f"Employee {employee_name} is done with tasks({done}/{total})")
+    print(f"Employee {employee_name} is done with tasks({done}/{total}):")
     for task in done_tasks:
         print(f'\t {task.get("title", None)}')
 
 
 if __name__ == "__main__":
-    try:
-        id = sys.argv[1]
-        print_employee_info(id=id)
-    except Exception as e:
-        pass
+    id = sys.argv[1]
+    print_employee_info(id=id)
