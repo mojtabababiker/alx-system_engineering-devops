@@ -24,7 +24,7 @@ def top_ten(subreddit):
             post_list = res.json()['data']['children']
             for idx, post in enumerate(post_list):
                 if idx >= 10:
-                    break;
+                    break
                 posts_titles.append(post['data']['title'])
         except Exception as e:
             posts_titles = None
