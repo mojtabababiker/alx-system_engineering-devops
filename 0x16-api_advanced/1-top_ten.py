@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-model that hold task 1 function
+model that hold task 1 function top_ten that fitch reddit API
 """
 import requests
 
@@ -13,10 +13,13 @@ def top_ten(subreddit):
     subreddit: str, text represents the subreddit title
     """
     url = "https://www.reddit.com/"
-    path = f"r/{subreddit}/hot.json?limit=10&count=10"
+    path = f"r/{subreddit}/hot.json?count=10"
     headers = {"User-Agent": "ALX/1"}
     posts_titles = []
 
+    if subreddit is None:
+        print(None)
+        return
     res = requests.get(url+path, headers=headers, allow_redirects=False)
     if res.status_code == 200:
         try:
@@ -27,7 +30,8 @@ def top_ten(subreddit):
                     break
                 posts_titles.append(post['data']['title'])
         except Exception as e:
-            posts_titles = None
+            pass
+            # posts_titles = None
 
         if posts_titles:
             for title in posts_titles:
