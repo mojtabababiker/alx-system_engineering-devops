@@ -2,7 +2,6 @@
 """
 model holding the first task
 """
-import requests
 
 
 def number_of_subscribers(subreddit):
@@ -20,6 +19,11 @@ def number_of_subscribers(subreddit):
     -----------
     the total number of subscribers
     """
+    import requests
+
+    if not subreddit:
+        return 0
+
     headers = {"User-Agent": "ALX/1"}
     url = "https://www.reddit.com/"
     path = f"r/{subreddit}/about.json"
@@ -31,7 +35,7 @@ def number_of_subscribers(subreddit):
         try:
             data = responce.json()['data']
             number_subs = data['subscribers']
-        except Exception as e:
+        except KeyError as e:
             return 0
     else:
         return 0
