@@ -26,7 +26,7 @@ def number_of_subscribers(subreddit):
 
     headers = {"User-Agent": "ALX/1"}
     url = "https://www.reddit.com/"
-    path = f"r/{subreddit}/about.json"
+    path = "r/{}/about.json".format(subreddit)
     number_subs = 0
 
     responce = requests.get(url+path, headers=headers, allow_redirects=False)
