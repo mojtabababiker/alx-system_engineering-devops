@@ -40,4 +40,4 @@ def number_of_subscribers(subreddit):
     else:
         return 0
 
-    return number_subs
+    return int(number_subs)
