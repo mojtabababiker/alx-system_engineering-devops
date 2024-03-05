@@ -13,7 +13,7 @@ def top_ten(subreddit):
     subreddit: str, text represents the subreddit title
     """
     url = "https://www.reddit.com/"
-    path = f"r/{subreddit}/hot.json?limit=9&count=9"
+    path = f"r/{subreddit}/hot.json?limit=10&count=10"
     headers = {"User-Agent": "ALX/1"}
     posts_titles = []
 
@@ -22,7 +22,9 @@ def top_ten(subreddit):
         try:
             # pprint.pprint(res.json())
             post_list = res.json()['data']['children']
-            for post in post_list:
+            for idx, post in enumerate(post_list):
+                if idx >= 10:
+                    break;
                 posts_titles.append(post['data']['title'])
         except Exception as e:
             posts_titles = None
