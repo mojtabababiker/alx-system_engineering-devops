@@ -30,9 +30,5 @@ def top_ten(subreddit):
         if posts_titles:
             for title in posts_titles:
                 print(title)
-        else:
-            print(None)
-
-
-if __name__ == "__main__":
-    top_ten("fgewprogramming")
+    else:
+        print(None)

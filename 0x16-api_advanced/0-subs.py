@@ -34,6 +34,6 @@ def number_of_subscribers(subreddit):
         except Exception as e:
             return 0
     else:
-        print(responce.status_code)
+        return 0
 
     return number_subs
