@@ -25,11 +25,11 @@ echo -e "\nfrontend web-1
 
 backend web-servers
 \tbalance roundrobin
-\tserver web-01 54.84.73.143:80 check
-\tserver web-02 35.175.102.250:80 check
-" >> /etc/haproxy/haproxy.conf.d/web-01-02_lb.conf
+\tserver web-01 54.196.38.44:80 check
+\tserver web-02 3.94.213.48:80 check
+" >> /etc/haproxy/haproxy.cfg
 
-echo -e "include /etc/haproxy/haproxy.conf.d/*.conf" >> /etc/haproxy/haproxy.cfg
+# echo -e "include /etc/haproxy/haproxy.conf.d/*.conf" >> /etc/haproxy/haproxy.cfg
 
 service haproxy reload
 exit 0
