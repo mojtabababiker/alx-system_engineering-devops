@@ -4,7 +4,7 @@
 # this code requier snap preinstalled
 
 # remove any preinstallde certbot
-apt-get remove certbot &> /dev/null
+apt-get remove certbot
 
 # install the certbot
 snap install --classic certbot
