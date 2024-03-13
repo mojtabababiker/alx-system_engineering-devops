@@ -1,0 +1,72 @@
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    # production server
+    server {
+        listen                80 default_server;
+   	server_name           54.196.38.44;
+    	root                  /var/www/html;
+     	error_page            404        /404.html;
+	add_header            X-Served-By  $hostname always;
+
+	# set some proxy custom http headers
+	proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+	# stop the proxy redirect
+    	proxy_redirect        off;
+
+	# rewrite the /airbnb-dynamic/<any-route> to /<any-route> only	
+    	rewrite		      ^/airbnb-dynamic/(.*) /$1;
+
+	# home page proxy, will pass the request to the wsgi server running on port 5003
+    	location / {
+	    proxy_pass	      http://localhost:5003/2-hbnb;
+    	}
+
+    	location /static/ {
+	    root	      /home/ubuntu/AirBnB_clone_v4/web_dynamic;
+	}
+
+    	location /redirect_me {
+            return            301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    	}
+
+    	location /airbnb-onepage/ {
+	    proxy_pass        http://localhost:5000;
+        }
+
+    	location /number_odd_or_even/ {
+	    proxy_pass        http://localhost:5001;
+        }
+	# api proxy route will pass the request to the api wsgi server
+    	location /api {
+	    proxy_pass	      http://localhost:5002;
+        }
+
+    }
+}

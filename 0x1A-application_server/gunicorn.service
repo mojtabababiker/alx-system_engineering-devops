@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn instance run the flask application server
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+Environment="PATH=/home/ubuntu/.local/bin/"
+ExecStart=/home/ubuntu/.local/bin/gunicorn -w 3 -b 0.0.0.0:5003 --access-logfile /tmp/airbnb-access.log --error-logfile /tmp/airbnb-error.log web_dynamic.2-hbnb:app
+
+[Install]
+WantedBy=multi-user.target
